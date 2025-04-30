@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Protection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        oswald: ['Oswald', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2e7d32',
+                        'primary-light': '#4caf50',
+                        'primary-dark': '#1b5e20',
+                        secondary: '#ff9800',
+                        accent: '#ff5722',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="font-poppins bg-gray-50 text-gray-800">
+    <!-- Header/Navigation -->
+    <header class="fixed top-0 z-50 w-full bg-white shadow-md">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="./image/a87020df-7af7-40d8-aba1-61c7819f1e46.jpg" alt="Logo" class="h-12 w-12 rounded-full border-2 border-primary">
+                <h1 class="text-2xl font-bold text-primary-dark">Crop<span class="text-primary">Guardian</span></h1>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" class="relative group text-gray-700 hover:text-primary transition-colors">
+                    Home
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </a>
+
+                <div class="relative group">
+                    <button class="flex items-center text-gray-700 hover:text-primary transition-colors">
+                        Quick Links <i class="ml-1 fas fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 -translate-y-2">
+                        <a href="weather.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-primary">Weather Update</a>
+                        <a href="map.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-primary">Map</a>
+                        <a href="leader.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-primary">Experts</a>
+                    </div>
+                </div>
+
+                <a href="#sightings" class="relative group text-gray-700 hover:text-primary transition-colors">
+                    Animal Sighting
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </a>
+
+                <a href="contact.html" class="relative group text-gray-700 hover:text-primary transition-colors">
+                    Contact
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </a>
+
+                <div class="flex items-center space-x-4">
+                    <div class="relative cursor-pointer transition-transform hover:scale-110" onclick="resetAlert()">
+                        <i class="fas fa-bell text-2xl text-gray-700"></i>
+                        <span class="absolute -top-1 -right-2 bg-accent text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center" id="alertCount">0</span>
+                    </div>
+                    
+                    <a href="./index.html" class="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-dark transition-colors">
+                        Logout
+                    </a>
+                </div>
+            </nav>
+
+            <button class="md:hidden focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-xl text-gray-700"></i>
+            </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-white py-2 px-4 shadow-lg" id="mobile-menu">
+            <a href="#" class="block py-2 text-gray-700 hover:text-primary">Home</a>
+            <div class="py-2">
+                <button class="flex items-center justify-between w-full text-gray-700 hover:text-primary" id="mobile-quick-links">
+                    Quick Links <i class="fas fa-chevron-down text-xs ml-1" id="mobile-chevron"></i>
+                </button>
+                <div class="hidden pl-4 mt-1" id="mobile-quick-links-dropdown">
+                    <a href="weather.html" class="block py-1 text-gray-700 hover:text-primary">Weather Update</a>
+                    <a href="map.html" class="block py-1 text-gray-700 hover:text-primary">Map</a>
+                    <a href="leader.html" class="block py-1 text-gray-700 hover:text-primary">Experts</a>
+                </div>
+            </div>
+            <a href="#sightings" class="block py-2 text-gray-700 hover:text-primary">Animal Sighting</a>
+            <a href="contact.html" class="block py-2 text-gray-700 hover:text-primary">Contact</a>
+            <div class="flex items-center justify-between py-2">
+                <div class="relative cursor-pointer" onclick="resetAlert()">
+                    <i class="fas fa-bell text-xl text-gray-700"></i>
+                    <span class="absolute -top-1 -right-2 bg-accent text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center" id="mobileAlertCount">0</span>
+                </div>
+                <a href="./index.html" class="bg-primary text-white px-4 py-1 rounded-lg font-medium">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden mt-16">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30 z-10"></div>
+        <img src="./image/7a761d0c69df3858fceff11ef8708f48.jpg" alt="Farm field" class="absolute inset-0 w-full h-full object-cover">
+
+        <div class="container mx-auto px-6 relative z-20 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-oswald">Protecting Crops, <span class="text-secondary">Preserving Nature</span></h1>
+            <p class="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">Innovative solutions for farmers to safeguard their crops while maintaining ecological balance</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#about" class="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-primary-dark transition-colors">Learn More</a>
+                <a href="#sightings" class="bg-white text-primary-dark px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors">Report Sighting</a>
+            </div>
+        </div>
+
+        <a href="#about" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <i class="fas fa-chevron-down text-3xl text-white"></i>
+        </a>
+    </section>
+
+    <div class="container mx-auto px-6 py-12">
+        <!-- About Section -->
+        <section id="about" class="py-16">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                <div class="w-full lg:w-1/2 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
+                    <img src="./image/9b56acb5-b7e1-40de-becb-4895a2b47439.jpg" alt="Farm protection" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                </div>
+
+                <div class="w-full lg:w-1/2">
+                    <span class="text-secondary font-semibold">ABOUT US</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 font-oswald">Sustainable Solutions for <span class="text-primary">Farm Protection</span></h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        At CropGuardian, we're committed to revolutionizing farm protection through innovative, eco-friendly solutions that balance agricultural productivity with wildlife conservation.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Our mission is to empower farmers with tools and knowledge to protect their livelihoods while fostering harmony between agriculture and the natural ecosystem.
+                    </p>
+                    <div class="flex flex-wrap gap-6">
+                        <div class="flex items-center">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-leaf text-primary text-xl"></i>
+                            </div>
+                            <span class="font-medium">Eco-Friendly</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-lightbulb text-primary text-xl"></i>
+                            </div>
+                            <span class="font-medium">Innovative</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-hands-helping text-primary text-xl"></i>
+                            </div>
+                            <span class="font-medium">Community Focused</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Section -->
+        <section class="py-16 bg-gray-50 rounded-3xl px-8">
+            <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16">
+                <div class="w-full lg:w-1/2 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
+                    <img src="./image/7fb7e07d-ef54-4915-b2ef-309519b0c31c.jpg" alt="App screenshot" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                </div>
+                
+                <div class="w-full lg:w-1/2">
+                    <span class="text-secondary font-semibold">OUR APP</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 font-oswald">Protect Your Crops in <span class="text-primary">3 Simple Steps</span></h2>
+                    
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="bg-primary-light text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">1</div>
+                            <div>
+                                <h3 class="font-semibold text-lg">Download the App</h3>
+                                <p class="text-gray-600">Available on both iOS and Android platforms</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary-light text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">2</div>
+                            <div>
+                                <h3 class="font-semibold text-lg">Set Up Your Profile</h3>
+                                <p class="text-gray-600">Quick and easy registration process</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary-light text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">3</div>
+                            <div>
+                                <h3 class="font-semibold text-lg">Get Protected</h3>
+                                <p class="text-gray-600">Purchase crop insurance or implement protection strategies</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1280px-Download_on_the_App_Store_Badge.svg.png" alt="App Store" class="h-12 hover:scale-105 transition-transform cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1280px-Google_Play_Store_badge_EN.svg.png" alt="Play Store" class="h-12 hover:scale-105 transition-transform cursor-pointer">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-secondary font-semibold">OUR ADVANTAGES</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-oswald">What Makes CropGuardian <span class="text-primary">Different</span></h2>
+                <p class="text-lg text-gray-600">
+                    We combine cutting-edge technology with deep agricultural expertise to provide farm-level risk assessment and protection that traditional insurance can't match.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4 font-oswald">Farmer Empowerment</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>Covers 100+ crops against 8 perils</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>Available in 10+ languages</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>127 agro-climatic zones covered</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-hand-holding-usd text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4 font-oswald">Fair & Transparent</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>Affordable insurance premiums</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>Customized insurance coverages</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>Digital KYC process</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-satellite-dish text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4 font-oswald">Advanced Technology</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>Satellite-based farm monitoring</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>Precision geo-tagging</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-light mt-1 mr-2"></i>
+                            <span>Paperless & hassle-free process</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perils Section -->
+        <section class="py-16 bg-primary-light/10 rounded-3xl px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-secondary font-semibold">COMPREHENSIVE COVERAGE</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-oswald">Protection Against <span class="text-primary">8 Major Perils</span></h2>
+                <p class="text-lg text-gray-600">
+                    Our solutions guard your crops against a wide range of natural threats and wildlife disturbances.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                <!-- Peril 1 -->
+                <div class="bg-white rounded-xl p-6 text-center border border-gray-100 hover:bg-primary-light hover:text-white hover:scale-105 transition-all">
+                    <img src="./image/img-13.svg" alt="Fire" class="w-16 h-16 mx-auto mb-4 hover:filter hover:brightness-0 hover:invert">
+                    <h3 class="font-semibold">Fire due to lightning</h3>
+                </div>
+                
+                <!-- Peril 2 -->
+                <div class="bg-white rounded-xl p-6 text-center border border-gray-100 hover:bg-primary-light hover:text-white hover:scale-105 transition-all">
+                    <img src="./image/img-14.svg" alt="Landslide" class="w-16 h-16 mx-auto mb-4 hover:filter hover:brightness-0 hover:invert">
+                    <h3 class="font-semibold">Landslide</h3>
+                </div>
+                
+                <!-- Peril 3 -->
+                <div class="bg-white rounded-xl p-6 text-center border border-gray-100 hover:bg-primary-light hover:text-white hover:scale-105 transition-all">
+                    <img src="./image/img-15.svg" alt="Cyclone" class="w-16 h-16 mx-auto mb-4 hover:filter hover:brightness-0 hover:invert">
+                    <h3 class="font-semibold">Cyclone</h3>
+                </div>
+                
+                <!-- Peril 4 -->
+                <div class="bg-white rounded-xl p-6 text-center border border-gray-100 hover:bg-primary-light hover:text-white hover:scale-105 transition-all">
+                    <img src="./image/img-16.svg" alt="Flood" class="w-16 h-16 mx-auto mb-4 hover:filter hover:brightness-0 hover:invert">
+                    <h3 class="font-semibold">Flood</h3>
+                </div>
+                
+                <!-- Peril 5 -->
+                <div class="bg-white rounded-xl p-6 text-center border border-gray-100 hover:bg-primary-light hover:text-white hover:scale-105 transition-all">
+                    <img src="./image/img-17.svg" alt="Inundation" class="w-16 h-16 mx-auto mb-4 hover:filter hover:brightness-0 hover:invert">
+                    <h3 class="font-semibold">Inundation</h3>
+                </div>
+                
+                <!-- Peril 6 -->
+                <div class="bg-white rounded-xl p-6 text-center border border-gray-100 hover:bg-primary-light hover:text-white hover:scale-105 transition-all">
+                    <img src="./image/img-18.svg" alt="Earthquake" class="w-16 h-16 mx-auto mb-4 hover:filter hover:brightness-0 hover:invert">
+                    <h3 class="font-semibold">Earthquake</h3>
+                </div>
+                
+                <!-- Peril 7 -->
+                <div class="bg-white rounded-xl p-6 text-center border border-gray-100 hover:bg-primary-light hover:text-white hover:scale-105 transition-all">
+                    <img src="./image/img-19.svg" alt="Animal Attack" class="w-16 h-16 mx-auto mb-4 hover:filter hover:brightness-0 hover:invert">
+                    <h3 class="font-semibold">Animal Attack</h3>
+                </div>
+                
+                <!-- Peril 8 -->
+                <div class="bg-white rounded-xl p-6 text-center border border-gray-100 hover:bg-primary-light hover:text-white hover:scale-105 transition-all">
+                    <img src="./image/img-20.svg" alt="Hailstorm" class="w-16 h-16 mx-auto mb-4 hover:filter hover:brightness-0 hover:invert">
+                    <h3 class="font-semibold">Hailstorm</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sighting Form Section -->
+        <section id="sightings" class="py-16">
+            <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-primary to-primary-light py-6 px-8">
+                    <h2 class="text-2xl font-bold text-white font-oswald">Report Wildlife Sighting</h2>
+                    <p class="text-white/90">Help us track wildlife activity to better protect your crops</p>
+                </div>
+                
+                <form id="sightingForm" enctype="multipart/form-data" class="p-8 space-y-6">
+                    <div>
+                        <label for="location" class="block text-gray-700 font-medium mb-2">Location (Latitude, Longitude)</label>
+                        <input type="text" id="location" name="location" placeholder="e.g. 28.6139° N, 77.2090° E" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                    </div>
+                    
+                    <div>
+                        <label for="species" class="block text-gray-700 font-medium mb-2">Animal Species</label>
+                        <input type="text" id="species" name="species" placeholder="e.g. Wild Boar, Elephant, etc." required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                    </div>
+                    
+                    <div>
+                        <label for="count" class="block text-gray-700 font-medium mb-2">Number of Animals</label>
+                        <input type="number" id="count" name="count" placeholder="Estimated number" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                    </div>
+                    
+                    <div>
+                        <label for="image" class="block text-gray-700 font-medium mb-2">Upload Photo (if available)</label>
+                        <div class="flex items-center justify-center w-full">
+                            <label for="image" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <i class="fas fa-cloud-upload-alt text-2xl text-gray-500 mb-2"></i>
+                                    <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                    <p class="text-xs text-gray-500">PNG, JPG, JPEG (MAX. 5MB)</p>
+                                </div>
+                                <input id="image" name="image" type="file" class="hidden" accept="image/*">
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" onclick="addSighting()" id="sub"
+                        class="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold text-lg mt-4 hover:bg-primary-dark transition-colors">
+                        Submit Report
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Recent Sightings Section -->
+        <section id="recentSightings" class="py-16">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-secondary font-semibold">COMMUNITY REPORTS</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-oswald">Recent Wildlife Sightings</h2>
+                <p class="text-lg text-gray-600">
+                    Stay informed about recent wildlife activity in your area reported by fellow farmers.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Sighting 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                    <img src="./image/elephant.jpg" alt="Elephant sighting" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Elephant Herd</h3>
+                            <span class="bg-primary-light text-white text-xs px-2 py-1 rounded-full">New</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Kaziranga Area, Assam</p>
+                        <p class="text-gray-700 mb-4">Group of 5 elephants spotted near paddy fields yesterday evening.</p>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>Reported: 2 hours ago</span>
+                            <span>3.2 km away</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sighting 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                    <img src="./image/wildboar.jpg" alt="Wild boar sighting" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Wild Boars</h3>
+                            <span class="bg-accent text-white text-xs px-2 py-1 rounded-full">Active</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Western Ghats, Maharashtra</p>
+                        <p class="text-gray-700 mb-4">Damage to sugarcane crops reported by multiple farmers.</p>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>Reported: 1 day ago</span>
+                            <span>5.7 km away</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sighting 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                    <img src="./image/nilgai.jpg" alt="Nilgai sighting" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Nilgai (Blue Bull)</h3>
+                            <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">Common</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Northern Plains, Bihar</p>
+                        <p class="text-gray-700 mb-4">Group of 3 nilgai seen feeding on maize crops this morning.</p>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>Reported: 3 days ago</span>
+                            <span>8.1 km away</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-secondary text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-700 transition-colors">
+                    View All Reports <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Strategies Section -->
+        <section class="py-16">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-secondary font-semibold">FARM PROTECTION</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-oswald">Effective Strategies to <span class="text-primary">Deter Wildlife</span></h2>
+                <p class="text-lg text-gray-600">
+                    Wild animal attacks pose significant challenges for farmers worldwide. From deer and wild pigs to elephants and monkeys, these animals can cause extensive damage to crops either by feeding on plants or simply by trampling through fields.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-primary-dark font-oswald">Agriculture Fences</h3>
+                    <p class="text-gray-600 mb-6">
+                        Fencing remains one of the most effective and long-lasting solutions for wildlife deterrence. However, it's important to note that fencing regulations vary by location, so always check local laws before installation.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl p-6 border-l-4 border-primary hover:bg-primary/5 hover:translate-x-1 transition-all">
+                            <h4 class="font-bold text-lg mb-2">Wire Fences</h4>
+                            <p class="text-gray-600">
+                                Constructed of durable metal wires woven together to form a strong physical barrier. These fences are highly effective and long-lasting with minimal maintenance requirements. Best suited for protecting high-value crops due to their higher cost.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 border-l-4 border-primary hover:bg-primary/5 hover:translate-x-1 transition-all">
+                            <h4 class="font-bold text-lg mb-2">Plastic Fences</h4>
+                            <p class="text-gray-600">
+                                Polypropylene fences offer a more affordable and easier-to-install alternative. While they meet most regulations and are widely accepted, they have a shorter lifespan (up to 10 years) and may be less effective in high-risk areas.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 border-l-4 border-primary hover:bg-primary/5 hover:translate-x-1 transition-all">
+                            <h4 class="font-bold text-lg mb-2">Electric Fences</h4>
+                            <p class="text-gray-600">
+                                Designed to deliver a safe but memorable shock to deter animals. Extremely effective when properly installed. Always check local regulations before installation and ensure proper warning signs are displayed to prevent human contact.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-6">
+                    <img src="./image/Screenshot 2025-04-05 141818.png" alt="Wire fence" class="w-full h-auto rounded-2xl object-cover shadow-md hover:shadow-lg transition-shadow">
+                    <img src="./image/Screenshot 2025-04-05 141840.png" alt="Electric fence" class="w-full h-auto rounded-2xl object-cover shadow-md hover:shadow-lg transition-shadow">
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="lg:order-2">
+                    <h3 class="text-2xl font-bold mb-6 text-primary-dark font-oswald">Natural & Chemical Repellents</h3>
+                    <p class="text-gray-600 mb-6">
+                        For farmers preferring non-mechanical solutions, various natural and chemical repellents can effectively minimize crop losses while being environmentally conscious.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-primary/20 text-primary-dark rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Smoke Barriers</h4>
+                                <p class="text-gray-600 text-sm">
+                                    In some regions, farmers burn elephant dung or other slow-burning materials to create dense smoke screens that deter animals.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary/20 text-primary-dark rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Natural Emulsions</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Fish or garlic-based sprays effectively repel rabbits and deer without harming the environment.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary/20 text-primary-dark rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">
+                                <i class="fas fa-bee"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Beehive Fencing</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Elephants are naturally repelled by honey bees, making this an effective deterrent that also provides additional income from honey production.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary/20 text-primary-dark rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Chemical Repellents</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Formulations containing Anthraquinone, Butanethiol, or Methyl Anthranilate create effective barriers against wildlife when used properly.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:order-1">
+                    <img src="./image/Screenshot 2025-04-05 141855.png" alt="Natural repellents" class="w-full h-full rounded-2xl object-cover shadow-md hover:shadow-lg transition-shadow">
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="py-16">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-secondary font-semibold">IN THE NEWS</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-oswald">Recent Crop Damage Reports</h2>
+                <p class="text-lg text-gray-600">
+                    Stay informed about wildlife-related agricultural challenges across the country.
+                </p>
+            </div>
+            
+            <div class="overflow-x-auto pb-6 -mx-4">
+                <div class="flex w-max space-x-6 px-4">
+                    <!-- News Card 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:-translate-y-1 flex-none w-80">
+                        <img src="./image/elephant.jpg" alt="Elephant crop destruction" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
+                        <div class="p-6">
+                            <span class="text-xs font-semibold text-primary-light">November 2024</span>
+                            <h3 class="text-xl font-bold my-2">Elephants Destroy Paddy Fields in Assam</h3>
+                            <p class="text-gray-600 text-sm mb-4">
+                                In late November 2024, a herd of wild elephants ventured into paddy fields near Kaziranga National Park, causing extensive damage to ready-to-harvest crops.
+                            </p>
+                            <a href="#" class="text-primary font-medium text-sm hover:underline">Read More →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- News Card 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:-translate-y-1 flex-none w-80">
+                        <img src="./image/wildboar.jpg" alt="Wild boar crop destruction" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
+                        <div class="p-6">
+                            <span class="text-xs font-semibold text-primary-light">March 2023</span>
+                            <h3 class="text-xl font-bold my-2">Wild Boars Ruin Sugarcane Crops</h3>
+                            <p class="text-gray-600 text-sm mb-4">
+                                In early 2023, sugarcane farmers in parts of Maharashtra reported heavy losses due to wild boars destroying crops, prompting calls for better protection measures.
+                            </p>
+                            <a href="#" class="text-primary font-medium text-sm hover:underline">Read More →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- News Card 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:-translate-y-1 flex-none w-80">
+                        <img src="./image/monkey.jpg" alt="Monkey crop destruction" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
+                        <div class="p-6">
+                            <span class="text-xs font-semibold text-primary-light">August 2024</span>
+                            <h3 class="text-xl font-bold my-2">Monkeys Attack Vegetable Farms</h3>
+                            <p class="text-gray-600 text-sm mb-4">
+                                In August 2024, aggressive monkey groups were reported in several villages in Himachal Pradesh, raiding vegetable farms and orchards, leaving farmers frustrated.
+                            </p>
+                            <a href="#" class="text-primary font-medium text-sm hover:underline">Read More →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- News Card 4 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:-translate-y-1 flex-none w-80">
+                        <img src="./image/nilgai.jpg" alt="Nilgai crop destruction" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
+                        <div class="p-6">
+                            <span class="text-xs font-semibold text-primary-light">February 2024</span>
+                            <h3 class="text-xl font-bold my-2">Nilgai Herds Ravage Fields in Bihar</h3>
+                            <p class="text-gray-600 text-sm mb-4">
+                                In February 2024, herds of Nilgai (blue bulls) were seen devastating standing crops like maize and pulses in Bihar, with farmers demanding compensation.
+                            </p>
+                            <a href="#" class="text-primary font-medium text-sm hover:underline">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors">
+                    View All News <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-primary-dark to-primary text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Links Column -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 font-oswald">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white/80 hover:text-white hover:translate-x-1 transition-all">Home</a></li>
+                        <li><a href="#about" class="text-white/80 hover:text-white hover:translate-x-1 transition-all">About</a></li>
+                        <li><a href="#sightings" class="text-white/80 hover:text-white hover:translate-x-1 transition-all">Report Sighting</a></li>
+                        <li><a href="contact.html" class="text-white/80 hover:text-white hover:translate-x-1 transition-all">Contact</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-white hover:translate-x-1 transition-all">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Logo Column -->
+                <div class="flex flex-col items-center justify-start">
+                    <a href="https://pmfby.gov.in/" target="_blank" class="mb-6">
+                        <img src="./image/download.png" alt="PMFBY Logo" class="h-24 w-auto rounded-full shadow-lg hover:shadow-xl transition-shadow">
+                    </a>
+                    <p class="text-white/80 text-center">
+                        In partnership with Pradhan Mantri Fasal Bima Yojana for comprehensive crop protection solutions.
+                    </p>
+                </div>
+
+                <!-- Contact Column -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 font-oswald">Contact Us</h3>
+                    <div class="space-y-4 text-white/80">
+                        <p class="flex items-center">
+                            <i class="fas fa-phone-alt text-primary-light mr-3"></i> +91 8416086839
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope text-primary-light mr-3"></i> support@cropguardian.com
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-primary-light mr-3"></i> New Delhi, India
+                        </p>
+
+                        <div class="mt-6">
+                            <h4 class="font-semibold mb-4 text-white">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-2xl text-white hover:text-secondary hover:-translate-y-1 transition-all"><i class="fab fa-facebook"></i></a>
+                                <a href="#" class="text-2xl text-white hover:text-secondary hover:-translate-y-1 transition-all"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-2xl text-white hover:text-secondary hover:-translate-y-1 transition-all"><i class="fab fa-youtube"></i></a>
+                                <a href="#" class="text-2xl text-white hover:text-secondary hover:-translate-y-1 transition-all"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-2xl text-white hover:text-secondary hover:-translate-y-1 transition-all"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/20 mt-12 pt-8">
+                <p class="text-white/70 text-center">
+                    &copy; 2024 CropGuardian. All rights reserved. Designed with <i class="fas fa-heart text-accent"></i> for farmers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileQuickLinks = document.getElementById('mobile-quick-links');
+        const mobileQuickLinksDropdown = document.getElementById('mobile-quick-links-dropdown');
+        const mobileChevron = document.getElementById('mobile-chevron');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileQuickLinks.addEventListener('click', () => {
+            mobileQuickLinksDropdown.classList.toggle('hidden');
+            mobileChevron.classList.toggle('rotate-180');
+        });
+
+        // Alert count functionality
+        function resetAlert() {
+            document.getElementById("alertCount").innerText = "0";
+            document.getElementById("mobileAlertCount").innerText = "0";
+            const recentSightings = document.getElementById("recentSightings");
+            recentSightings.scrollIntoView({ behavior: "smooth" });
+        }
+
+        function addSighting(event) {
+            event.preventDefault();
+
+            const location = document.querySelector('input[name="location"]').value.trim();
+            const species = document.querySelector('input[name="species"]').value.trim();
+            const count = document.querySelector('input[name="count"]').value.trim();
+            const image = document.querySelector('input[name="image"]').files[0];
+
+            if (location === "" || species === "" || count === "" || !image) {
+                alert("Please fill in all fields before submitting.");
+                return;
+            }
+
+            setTimeout(() => {
+                incrementAlertCount();
+                document.getElementById("sightingForm").reset();
+                alert("Thank you for reporting the wildlife sighting!");
+            }, 500);
+        }
+
+        function incrementAlertCount() {
+            const badge = document.getElementById("alertCount");
+            const mobileBadge = document.getElementById("mobileAlertCount");
+            let count = parseInt(badge.innerText);
+            badge.innerText = count + 1;
+            mobileBadge.innerText = count + 1;
+        }
+
+        document.getElementById("sightingForm").addEventListener("submit", addSighting);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = document.getElementById('head').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const animateElements = document.querySelectorAll('.animate-fade-in, .animate-fade-up, .animate-zoom-in, .animate-flip-up');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.add('translate-y-0');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

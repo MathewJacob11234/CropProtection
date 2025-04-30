@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Contact</title>
+</head>
+<body>
+    <header class="flex fixed top-0 justify-between items-center bg-green-50 shadow-lg w-full">
+        <div class="m-4 flex gap-4">
+            <img src="./image/a87020df-7af7-40d8-aba1-61c7819f1e46.jpg" height="40px"
+                width="40px" class="rounded-full">
+            <h1 class="text-2xl font-semibold font-serif text-black my-auto">Crop Protection</h1>
+        </div>
+        <nav class="flex gap-4 text-black items-center pr-12">
+            <a href="main.html" class="text-black text-sm hover:text-green-500">Home</a>
+            <a href="map.html" class="text-black text-sm hover:text-green-500">Map</a>
+            <a href="weather.html" class="text-black text-sm hover:text-green-500">Weather</a>
+            <a href="./contact.html" class="text-black text-sm hover:text-green-500">Contact</a>
+        </nav>
+    </header>
+
+    <div class="bg-blue-200/70 flex gap-20">
+        <div class="max-w-3xl w-full text-center p-4 mt-12 ml-14">
+            <h1 class="text-6xl text-gray-900 mt-5">Get in touch with us</h1>
+            <p class="text-gray-700 text-xl text-left mt-8 ml-14">
+                Have a question or need assistance? We’re here to help. Whether you have general inquiries about our insurance plans or need to address a specific concern, our team is ready to assist you.
+            </p>
+            
+            <div class="mt-8 ml-14 w-96">
+                <!-- Kshema Products Enquiry -->
+                <div class="p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-900">Contact</h2>
+                    <div class="mt-4 flex items-center space-x-2">
+                        <span class="text-blue-500">📞</span>
+                        <p class="text-gray-700 text-xl">1800 572 3013 (toll-free)</p>
+                    </div>
+                    <div class="mt-2 flex items-center space-x-2">
+                        <span class="text-blue-500">📧</span>
+                        <p class="text-gray-700 text-xl">customer.support@umda.co</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+
+            <section id="forum" class="bg-black/80 m-10 mt-36 py-6 rounded-lg shadow-md">
+                
+                <div class="w-[500px] mx-auto py-2 px-4 rounded-lg">
+                    <h2 class="text-2xl font-semibold text-center text-white mb-4">Contact</h2>
+                    <!-- Input Fields -->
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <label class="flex-1 text-white">
+                                First Name:
+                                <input type="text" id="firstName" class="border w-full p-2 rounded-lg text-black" placeholder="Aryan">
+                            </label>
+                            <label class="flex-1 text-white">
+                                Last Name:
+                                <input type="text" id="lastName" class="border w-full p-2 rounded-lg text-black" placeholder="Sharma">
+                            </label>
+                        </div>
+                        <label class="text-white">
+                            Address:
+                            <input type="text" id="address" class="border w-full p-2 rounded-lg text-black"
+                                placeholder="Prayagraj">
+                        </label>
+                        <label class="text-white">
+                            Message:
+                            <textarea id="forumInput" placeholder="Write your message here..."
+                                class="w-full border p-2 rounded-lg text-black"></textarea>
+                        </label>
+                    </div>
+    
+                    <!-- Post Button -->
+                    <button onclick="postForumMessage()"
+                        class="bg-green-500 text-white px-4 py-2 mt-2 rounded-lg hover:bg-green-700 w-full">
+                        Submit
+                    </button>
+    
+                    <!-- Forum Posts Display -->
+                    <div id="forumPosts" class="mt-4 flex flex-wrap gap-4">
+                        <!-- Posts will be dynamically added here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+    <script>
+         // community forum
+         function postForumMessage() {
+                // Get the input values
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const address = document.getElementById('address').value;
+                const message = document.getElementById('forumInput').value;
+
+                // Validate the inputs
+                if (!firstName || !lastName || !address || !message) {
+                    alert('All fields are required');
+                    return;
+                }
+
+                // Create the data object to send
+                const data = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    address: address,
+                    message: message
+                };
+
+                // Send the data to the PHP script using AJAX
+                fetch('post_forum_message.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // Clear the input fields
+                            document.getElementById('firstName').value = '';
+                            document.getElementById('lastName').value = '';
+                            document.getElementById('address').value = '';
+                            document.getElementById('forumInput').value = '';
+
+                            // Optionally, you can remove the post display from the frontend
+                            const forumPosts = document.getElementById('forumPosts');
+                            forumPosts.innerHTML = ''; // Clear the posts display
+                        } else {
+                            alert(result.error || 'Failed to post message');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while posting the message');
+                    });
+            }
+
+    </script>
+    
+</body>
+</html>

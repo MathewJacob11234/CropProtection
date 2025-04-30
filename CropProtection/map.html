@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Wildlife Protection Map | CropGuard</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .info-card {
+      transition: all 0.3s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .animal-stat {
+      background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+    }
+  </style>
+</head>
+
+<body class="bg-green-50">
+  <!-- Navbar -->
+  <nav class="flex fixed top-0 justify-between items-center bg-white shadow-md w-full  px-6 py-3">
+    <div class="flex items-center space-x-3">
+      <img src="./image/a87020df-7af7-40d8-aba1-61c7819f1e46.jpg" alt="CropGuard Logo" class="h-10 w-10 rounded-full border-2 border-green-400">
+      <h1 class="text-xl font-bold text-green-800 font-sans">Crop Protection</h1>
+    </div>
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="main.html" class="text-gray-700 hover:text-green-600 transition-colors flex items-center">
+         Home
+      </a>
+      <a href="weather.html" class="text-gray-700 hover:text-green-600 transition-colors flex items-center">
+         Weather
+      </a>
+      <a href="./leader.html" class="text-gray-700 hover:text-green-600 transition-colors flex items-center">
+         Experts
+      </a>
+      <a href="contact.html" class="text-gray-700 hover:text-green-600 transition-colors flex items-center">
+         Contact
+      </a>
+    </div>
+  </nav>
+
+  <!-- Map Section -->
+  <section class="mt-16 p-6 max-w-7xl mx-auto">
+    <div class="mb-4 text-center">
+      <h2 class="text-3xl font-bold text-green-800 mb-2">Wildlife Protection Map</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">Track animal movements and protect your crops with real-time wildlife sighting data across India</p>
+    </div>
+    
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Map Container -->
+      <div class="lg:w-2/3 h-[400px] rounded-xl shadow-xl overflow-hidden border-2 border-green-200">
+        <div id="map" class="w-full h-full"></div>
+      </div>
+      
+      <!-- Information Panel -->
+      <div class="lg:w-1/3">
+        <!-- About Card -->
+        <div class="info-card bg-white p-6 rounded-xl shadow-md border border-green-100">
+          <div class="flex items-center mb-4">
+            <i class="fas fa-map-marked-alt text-green-500 text-2xl mr-3"></i>
+            <h3 class="text-xl font-semibold text-gray-800">Interactive Wildlife Map</h3>
+          </div>
+          <p class="text-gray-600 mb-4">
+            Our comprehensive map displays verified wildlife sightings to help farmers anticipate and prevent crop damage. 
+            The data is updated regularly with inputs from forest departments and local communities.
+          </p>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 gap-4">
+            <div class="animal-stat p-4 rounded-lg text-center">
+                <div class="text-purple-600 mb-2">
+                  <i class="fas fa-deer text-2xl"></i>
+                </div>
+                <h4 class="font-bold text-gray-700">Nilgai Reports</h4>
+                <p class="text-2xl font-bold text-purple-700">215</p>
+                <p class="text-xs text-gray-500">This month</p>
+              </div>
+          <div class="animal-stat p-4 rounded-lg text-center">
+            <div class="text-blue-600 mb-2">
+              <i class="fas fa-elephant text-2xl"></i>
+            </div>
+            <h4 class="font-bold text-gray-700">Elephant Herds</h4>
+            <p class="text-2xl font-bold text-blue-700">87</p>
+            <p class="text-xs text-gray-500">This month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leaflet Scripts -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+  <script>
+    // Initialize the map centered on India
+    const map = L.map('map').setView([22.3511, 78.6677], 5);
+
+    // Add base layer
+    const baseLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Heatmap data
+    const heatData = [
+      [22.57, 88.36, 0.7],  // Kolkata
+      [28.61, 77.23, 0.9],  // Delhi
+      [28.71, 77.20, 0.9],  // Delhi
+      [28.65, 77.22, 0.9],  // Delhi
+      [19.07, 72.87, 0.8],  // Mumbai
+      [13.08, 80.27, 0.6],  // Chennai
+      [26.85, 80.94, 0.7],  // Lucknow
+      [25.45, 81.85, 0.8],  // Allahabad
+      [27.17, 78.02, 0.9],  // Agra
+      [23.03, 72.58, 0.6],  // Ahmedabad
+      [15.30, 74.12, 0.8],  // Goa
+      [21.15, 79.09, 0.9],  // Nagpur
+      [17.38, 78.48, 0.7],  // Hyderabad
+      [11.41, 76.70, 0.8],  // Ooty
+      [31.63, 74.87, 0.9],  // Amritsar
+      [26.91, 75.78, 0.7]   // Jaipur
+    ];
+
+    // Create heat layer with custom gradient
+    const heatLayer = L.heatLayer(heatData, {
+      radius: 30,
+      blur: 20,
+      maxZoom: 10,
+      gradient: {0.4: 'blue', 0.6: 'lime', 0.8: 'yellow', 1.0: 'red'}
+    });
+
+    // Custom icons
+    const tigerIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    const elephantIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    const leopardIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    const nilgaiIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    // Create animal layers with custom icons and detailed popups
+    const tigerLayer = L.layerGroup([
+      L.marker([22.57, 88.36], {icon: tigerIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-red-600 mb-1">Tiger Sighting</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Sundarbans, West Bengal</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 12 Apr 2023</p>
+          <p class="text-sm"><i class="fas fa-exclamation-triangle mr-1"></i> High activity zone</p>
+        </div>
+      `),
+      L.marker([21.15, 79.09], {icon: tigerIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-red-600 mb-1">Tiger Sighting</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Tadoba Reserve, Maharashtra</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 10 Apr 2023</p>
+        </div>
+      `),
+      L.marker([26.91, 75.78], {icon: tigerIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-red-600 mb-1">Tiger Sighting</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Ranthambore, Rajasthan</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 8 Apr 2023</p>
+        </div>
+      `)
+    ]);
+
+    const elephantLayer = L.layerGroup([
+      L.marker([11.41, 76.70], {icon: elephantIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-blue-600 mb-1">Elephant Herd</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Nilgiri Hills, Tamil Nadu</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 14 Apr 2023</p>
+          <p class="text-sm"><i class="fas fa-elephant mr-1"></i> Group of 12 elephants</p>
+        </div>
+      `),
+      L.marker([17.38, 78.48], {icon: elephantIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-blue-600 mb-1">Elephant Herd</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Nallamala Forest, Telangana</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 9 Apr 2023</p>
+        </div>
+      `),
+      L.marker([15.30, 74.12], {icon: elephantIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-blue-600 mb-1">Elephant Herd</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Bhagwan Mahavir Sanctuary, Goa</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 5 Apr 2023</p>
+        </div>
+      `)
+    ]);
+
+    const leopardLayer = L.layerGroup([
+      L.marker([28.61, 77.23], {icon: leopardIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-orange-600 mb-1">Leopard Sighting</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Delhi Ridge, Delhi</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 13 Apr 2023</p>
+          <p class="text-sm text-red-500"><i class="fas fa-exclamation-circle mr-1"></i> Near agricultural area</p>
+        </div>
+      `),
+      L.marker([26.85, 80.94], {icon: leopardIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-orange-600 mb-1">Leopard Sighting</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Kukrail Forest, Uttar Pradesh</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 11 Apr 2023</p>
+        </div>
+      `),
+      L.marker([19.07, 72.87], {icon: leopardIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-orange-600 mb-1">Leopard Sighting</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Sanjay Gandhi National Park, Mumbai</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 7 Apr 2023</p>
+        </div>
+      `)
+    ]);
+
+    const nilgaiLayer = L.layerGroup([
+      L.marker([28.71, 77.20], {icon: nilgaiIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-purple-600 mb-1">Nilgai Sighting</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Yamuna Biodiversity Park, Delhi</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 14 Apr 2023</p>
+          <p class="text-sm"><i class="fas fa-info-circle mr-1"></i> Group of 5 nilgais</p>
+        </div>
+      `),
+      L.marker([27.17, 78.02], {icon: nilgaiIcon}).bindPopup(`
+        <div class="font-sans">
+          <h4 class="font-bold text-purple-600 mb-1">Nilgai Sighting</h4>
+          <p class="text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Near Agra, Uttar Pradesh</p>
+          <p class="text-sm"><i class="fas fa-calendar-alt mr-1"></i> Reported: 10 Apr 2023</p>
+          <p class="text-sm text-red-500"><i class="fas fa-exclamation-circle mr-1"></i> Crop damage reported</p>
+        </div>
+      `)
+    ]);
+
+    // Add layer control
+    L.control.layers({
+      "Base Map": baseLayer
+    }, {
+      "Heatmap (High Activity Areas)": heatLayer,
+      "Tiger Sightings": tigerLayer,
+      "Elephant Herds": elephantLayer,
+      "Leopard Sightings": leopardLayer,
+      "Nilgai Sightings": nilgaiLayer
+    }, {
+      collapsed: false,
+      position: 'bottomright'
+    }).addTo(map);
+
+    // Add scale control
+    L.control.scale({position: 'bottomleft'}).addTo(map);
+
+    // Default to showing heatmap
+    heatLayer.addTo(map);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership | Crop Protection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-green-50">
+  <header class="flex fixed top-0 justify-between items-center bg-white shadow-md w-full z-50">
+    <div class="m-4 flex gap-4 items-center">
+        <img src="./image/a87020df-7af7-40d8-aba1-61c7819f1e46.jpg" height="40px"
+            width="40px" class="rounded-full border-2 border-green-500">
+        <h1 class="text-2xl font-semibold font-serif text-green-800 my-auto">Crop Protection</h1>
+    </div>
+    <nav class="flex gap-6 text-black items-center pr-12">
+        <a href="main.html" class="text-gray-700 text-sm hover:text-green-600 transition-colors duration-300">Home</a>
+        <a href="map.html" class="text-gray-700 text-sm hover:text-green-600 transition-colors duration-300">Map</a>
+        <a href="./leader.html" class="text-green-600 font-medium text-sm hover:text-green-700 transition-colors duration-300">Experts</a>
+        <a href="contact.html" class="text-gray-700 text-sm hover:text-green-600 transition-colors duration-300">Contact</a>
+    </nav>
+</header>
+
+
+    <div class="mt-24 px-8">
+        <div class="max-w-4xl mx-auto text-center mb-12">
+            <h1 class="text-5xl font-bold text-green-800 mb-4">Our Leadership</h1>
+            <p class="text-lg text-gray-600">Meet the visionary leaders driving innovation in crop protection and agricultural sustainability.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <!-- Leader 1 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6">
+                    <img src="./image/img-29.jpg" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-green-100">
+                    <div class="mt-4">
+                        <h3 class="text-xl font-bold text-green-800">Natraj Nukala</h3>
+                        <p class="text-green-600 text-sm">Founder & Chairman</p>
+                        <button onclick="openModal()"
+                            class="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leader 2 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6">
+                    <img src="./image/img-30.jpg" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-green-100">
+                    <div class="mt-4">
+                        <h3 class="text-xl font-bold text-green-800">Vyasa Burugupalli</h3>
+                        <p class="text-green-600 text-sm">CEO & Director</p>
+                        <button onclick="openModal1()"
+                            class="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leader 3 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6">
+                    <img src="./image/img-31.jpg" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-green-100">
+                    <div class="mt-4">
+                        <h3 class="text-xl font-bold text-green-800">Rajeshnani Dasari</h3>
+                        <p class="text-green-600 text-sm">Technology Director</p>
+                        <button onclick="openModal2()"
+                            class="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leader 4 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6">
+                    <img src="./image/img-32.jpg" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-green-100">
+                    <div class="mt-4">
+                        <h3 class="text-xl font-bold text-green-800">Deepa Karthykeyan</h3>
+                        <p class="text-green-600 text-sm">Sustainability Advisor</p>
+                        <button onclick="openModal3()"
+                            class="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <!-- Modal 1 -->
+        <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-8">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="md:w-1/3 flex flex-col items-center">
+                            <img src="./image/img-29.jpg" alt="Natraj Nukala"
+                                class="w-48 h-48 object-cover rounded-full border-4 border-green-200">
+                            <h2 class="text-2xl font-bold text-green-800 mt-4">Natraj Nukala</h2>
+                            <p class="text-green-600 font-medium">Founder & Chairman</p>
+                        </div>
+                        <div class="md:w-2/3">
+                            <p class="text-gray-700 leading-relaxed">
+                                He has an undergraduate degree in engineering from India and a master's in risk management from
+                                New York University, USA. He has been involved with the insurance sector for over a decade while
+                                his family interests include agriculture & textile businesses. This gave him a first-hand experience
+                                and deep insight into the Indian agri sector and the workings of the Indian farmer. He decided to
+                                bring his expertise and his experience together to create Kshema General Insurance Ltd. He also
+                                established a successful insurance broking company, ITUS before taking the plunge in crop insurance with Kshema.
+                            </p>
+                            <div class="mt-6 flex justify-end">
+                                <button onclick="closeModal()"
+                                    class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 2 -->
+        <div id="modal1" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-8">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="md:w-1/3 flex flex-col items-center">
+                            <img src="./image/img-30.jpg" alt="Dr Vyasa Krishna Burugupalli"
+                                class="w-48 h-48 object-cover rounded-full border-4 border-green-200">
+                            <h2 class="text-2xl font-bold text-green-800 mt-4">Dr Vyasa Krishna Burugupalli</h2>
+                            <p class="text-green-600 font-medium">CEO & Director</p>
+                        </div>
+                        <div class="md:w-2/3">
+                            <p class="text-gray-700 leading-relaxed">
+                                Dr Burugupalli is a veteran of the insurance industry with an illustrious career spanning over 45
+                                years in different regulatory regimes across continents. He was the Chief Executive Officer of the
+                                First Insurance Company Limited in Kampala before taking over as the MD and CEO of Kshema General
+                                Insurance Limited. His leadership also extends to guiding various NGOs, including the Bill and
+                                Melinda Gates Foundation grantees, on microinsurance. He holds a doctoral qualification in insurance
+                                risk management. He is a Fellow of the Australian and New Zealand Institute of Insurance and Finance
+                                as well as a Certified Insurance Practitioner. He is also a Fellow of the Insurance Training College
+                                of Uganda.
+                            </p>
+                            <div class="mt-6 flex justify-end">
+                                <button onclick="closeModal1()"
+                                    class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 3 -->
+        <div id="modal2" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-8">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="md:w-1/3 flex flex-col items-center">
+                            <img src="./image/img-31.jpg" alt="Rajeshnani Dasari"
+                                class="w-48 h-48 object-cover rounded-full border-4 border-green-200">
+                            <h2 class="text-2xl font-bold text-green-800 mt-4">Rajeshnani Dasari</h2>
+                            <p class="text-green-600 font-medium">Technology Director</p>
+                        </div>
+                        <div class="md:w-2/3">
+                            <p class="text-gray-700 leading-relaxed">
+                                Rajesh is a technologist with over two decades of experience across insurance, automotive,
+                                manufacturing, pharmaceutical and high-tech industries. He was with Oracle Corporation as Senior
+                                Director in emerging technologies of Mobility, Bots, IoT, and Blockchain in his most recent stint.
+                                Prior to this, he was leading Oracle's efforts to serve customers in their adoption of cloud and
+                                emerging technologies. Rajesh is an alumnus of prestigious institutions like BITS Pilani (India),
+                                Clemson University, South Carolina (USA), and State University of New York College at Buffalo (USA).
+                            </p>
+                            <div class="mt-6 flex justify-end">
+                                <button onclick="closeModal2()"
+                                    class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 4 -->
+        <div id="modal3" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-8">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="md:w-1/3 flex flex-col items-center">
+                            <img src="./image/img-32.jpg" alt="Deepa Karthykeyan"
+                                class="w-48 h-48 object-cover rounded-full border-4 border-green-200">
+                            <h2 class="text-2xl font-bold text-green-800 mt-4">Deepa Karthykeyan</h2>
+                            <p class="text-green-600 font-medium">Sustainability Advisor</p>
+                        </div>
+                        <div class="md:w-2/3">
+                            <p class="text-gray-700 leading-relaxed">
+                                Deepa is co-founder and partner of Athena Infonomics – a global impact solutions group. Deepa has
+                                led several programmes in Asia and Africa with a focus on advancing equitable and safe public
+                                services in changing urban contexts. She serves as part of the Technical Advisory Group for the
+                                Global Partnership for Sustainable Development Data (GPSDD) and is a member of the IWA digital water
+                                program steering committee. Deepa holds a master's degree in economics from the National University
+                                of Singapore.
+                            </p>
+                            <div class="mt-6 flex justify-end">
+                                <button onclick="closeModal3()"
+                                    class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Team Section -->
+        <div class="max-w-4xl mx-auto text-center my-16">
+            <h1 class="text-4xl font-bold text-green-800 mb-4">The Management Team</h1>
+            <p class="text-lg text-gray-600">Our dedicated team working behind the scenes to make crop protection accessible to all.</p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                <img src="./image/upen.png" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-green-100">
+                <h3 class="text-lg font-semibold text-green-800 mt-4">Upendar</h3>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                <img src="./image/mathew.jpg" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-green-100">
+                <h3 class="text-lg font-semibold text-green-800 mt-4">Mathew</h3>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                <img src="./image/dhruv.jpg" class="w-32 h-32 mx-auto rounded-full  border-4 border-green-100">
+                <h3 class="text-lg font-semibold text-green-800 mt-4">Dhruva</h3>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                <img src="./image/ayan.jpg" class="w-32 h-32 mx-auto rounded-full object-cover border-4 border-green-100">
+                <h3 class="text-lg font-semibold text-green-800 mt-4">Ayan</h3>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-green-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <img src="./image/a87020df-7af7-40d8-aba1-61c7819f1e46.jpg" height="40px" width="40px" class="rounded-full mr-3">
+                        <h2 class="text-xl font-semibold">Crop Protection</h2>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="text-green-200 hover:text-white transition-colors duration-300">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-green-200 hover:text-white transition-colors duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-green-200 hover:text-white transition-colors duration-300">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-green-200 hover:text-white transition-colors duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-green-700 mt-8 pt-6 text-center text-green-300 text-sm">
+                <p>© 2025 Crop Protection. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Modal functions
+        function openModal() {
+            document.getElementById('modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal1() {
+            document.getElementById('modal1').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal1() {
+            document.getElementById('modal1').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2() {
+            document.getElementById('modal2').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal2() {
+            document.getElementById('modal2').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal3() {
+            document.getElementById('modal3').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal3() {
+            document.getElementById('modal3').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+    
+    <!-- Font Awesome for icons (optional) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
